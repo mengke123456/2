@@ -23,7 +23,6 @@ class PublicController extends \yii\web\Controller {
                 Yii::$app->end();
             }
         }
-
         return $this->render('login', ['model' => $model]);
     }
 
@@ -37,6 +36,10 @@ class PublicController extends \yii\web\Controller {
         }
         //否则跳回来的页面
         $this->goBack();
+    }
+
+    public function actionSeekpassword() {
+        return $this->render('seekpassword');
     }
 
 }

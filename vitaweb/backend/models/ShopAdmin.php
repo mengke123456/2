@@ -50,15 +50,17 @@ class ShopAdmin extends \yii\db\ActiveRecord {
         }
     }
 
-    //login方法作用：验证数据
+   
     public function login($data) {
 
         //如果载入成功并且验证成功
         if ($this->load($data) && $this->validate()) {
+
             //勾选‘记住我’则设置session有效期为lifetime）
             $session = Yii::$app->session;
             $lifetime = $this->rememberMe ? 24 * 3600 : 0;
             session_set_cookie_params($lifetime);
+
             //写入session
             $session['admin'] = ['adminuser' => $this->adminuser,
                 'isLogin' => 1,];

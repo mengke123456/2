@@ -53,7 +53,9 @@ use yii\helpers\Html;
                     echo $form->field($model, 'adminpss')
                             ->passwordInput(["class" => "span12", "placeholder" => "管理员密码"]);
                     ?>
-                    <a href = "#" class = "forgot">忘记密码?</a>
+                    <!--忘记密码-->
+                    <a href = "<?php echo yii\helpers\Url::to(['public/seekpassword']); ?>
+                       " class = "forgot">忘记密码?</a>
                     <?php
                     //记住我
                     echo $form->field($model, 'rememberMe')
@@ -82,7 +84,7 @@ use yii\helpers\Html;
                         $(this).addClass("active");
                         var bg = $(this).data("img");
 
-                        $("html").css("background-image", "url('img/bgs/" + bg + "')");
+                        $("html").css("background-image", "url('img/bgs/" + bg + "')  ");
                     });
 
                 });</script>
