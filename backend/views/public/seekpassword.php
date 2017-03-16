@@ -10,7 +10,7 @@ use yii\helpers\Html;
 <html class="login-bg">
 
     <head>
-        <title>VITAWEB - 后台登录</title>
+        <title>VITAWEB - 找回密码</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- bootstrap -->
         <link href="assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
@@ -50,20 +50,15 @@ use yii\helpers\Html;
                     <?php
                     echo $form->field($model, 'adminuser')
                             ->textInput(["class" => "span12", "placeholder" => "占位符", 'autofocus' => true]);
-                    echo $form->field($model, 'adminpss')
-                            ->passwordInput(["class" => "span12", "placeholder" => "管理员密码"]);
+                    echo $form->field($model, 'adminmail')
+                            ->textInput(["class" => "span12", "placeholder" => "管理员密码"]);
                     ?>
                     <!--忘记密码-->
-                    <a href = "<?php echo yii\helpers\Url::to(['public/seekpassword']); ?>
-                       " class = "forgot">忘记密码?</a>
+                    <a href = "<?php echo yii\helpers\Url::to(['public/login']); ?>
+                       " class = "forgot">返回登录?</a>
                     <?php
-                    //记住我
-                    echo $form->field($model, 'rememberMe')
-                            ->checkbox([
-                                'id' => 'rememberMe',
-                                'template' => '<div class="remember">{input}<label for = "rememberMe">记住我</label></div></div>']);
                     //登录按钮
-                    echo Html::submitButton('登录', ["class" => "btn-glow primary login"])
+                    echo Html::submitButton('找回密码', ["class" => "btn-glow primary login"])
                     ?>
                     <?php ActiveForm::end(); ?>
                 </div>
