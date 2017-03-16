@@ -1,19 +1,14 @@
 <p class="rich-diff-level-zero">
-	<strong class="rich-diff-level-one"><span style="background-color:#60D978;">&nbsp;</span> 前台 </strong><strong class="rich-diff-level-one"></strong><br class="rich-diff-level-one" />
+	<strong class="rich-diff-level-one"><span style="background-color:#60D978;"></span>|前台 </strong><strong class="rich-diff-level-one"></strong><br class="rich-diff-level-one" />
 <span style="background-color:#60D978;"></span>主页：index/index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 商品：r=product/index &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 商品详情：r=product/detail <br class="rich-diff-level-one" />
 购物车： r=cart/index &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 收银台：order/check &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 订单中心：order/index <br class="rich-diff-level-one" />
 注册登录 member/auth
 </p>
 <p class="rich-diff-level-zero">
-	<strong class="rich-diff-level-one"><span style="background-color:#60D978;">&nbsp;</span> 后台 </strong><br class="rich-diff-level-one" />
+	<strong class="rich-diff-level-one"><span style="background-color:#60D978;"></span>|后台 </strong><br class="rich-diff-level-one" />
 首页：default/index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 登录 ：public/login
 </p>
-<p class="rich-diff-level-zero">
-	<span> </span> 
-</p>
-<div>
-	<span><span style="background-color:#60D978;">&nbsp;</span> 0.整体分析用例图</span> 
-</div>
+<hr />
 <div>
 	<span>1.整理数据表</span> 
 </div>
@@ -32,6 +27,3 @@
 <div>
 	<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 后台登录：需要判断岗位类型，跳转对应后台首页</span> 
 </div>
-<p>
-	<br />
-</p>
