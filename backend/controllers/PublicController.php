@@ -39,7 +39,16 @@ class PublicController extends \yii\web\Controller {
     }
 
     public function actionSeekpassword() {
-        return $this->render('seekpassword');
+        $this->layout = false;
+        //在控制器中连接数据库
+        $model = new ShopAdmin();
+        
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            $model->seekPass($post);
+        }
+        
+        return $this->render("seekpassword", ['model' => $model]);
     }
 
 }

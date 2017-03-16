@@ -50,7 +50,7 @@ use yii\helpers\Html;
                     <?php
                     echo $form->field($model, 'adminuser')
                             ->textInput(["class" => "span12", "placeholder" => "占位符", 'autofocus' => true]);
-                    echo $form->field($model, 'adminpss')
+                    echo $form->field($model, 'adminpass')
                             ->passwordInput(["class" => "span12", "placeholder" => "管理员密码"]);
                     ?>
                     <!--忘记密码-->

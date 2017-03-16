@@ -9,7 +9,7 @@ use Yii;
  *
  * @property integer $adminid
  * @property string $adminuser
- * @property string $adminpss
+ * @property string $adminpass
  * @property string $adminemail
  * @property integer $logintime
  * @property integer $loginip
@@ -28,32 +28,49 @@ class ShopAdmin extends \yii\db\ActiveRecord {
     //提交到数据库前执行简单的验证
     public function rules() {
         return [
-            ['adminuser', 'required', 'message' => '管理员帐号不能为空'],
-            ['adminpss', 'required', 'message' => '管理员密码不能为空'],
-            ['rememberMe', 'boolean'],
-            ['adminpss', 'validatePass'],
+            ['adminuser', 'required', 'message' => '管理员帐号不能为空',
+                //指定验证规则启用的场景
+                'on' => ['login', 'seekpass']],
+            ['adminpass', 'required', 'message' => '管理员密码不能为空', 'on' => 'login'],
+            ['rememberMe', 'boolean', 'on' => 'login'],
+            ['adminpass', 'validatePass', 'on' => 'login'],
+            ['adminemail', 'required', 'message' => '邮箱不能为空', 'on' => 'seekpass'],
+            ['adminemail', 'email', 'message' => '邮箱格式不正确', 'on' => 'seekpass'],
+            ['adminemail', 'validateEmail', 'on' => 'seekpass']
         ];
     }
 
     public function validatePass() {
-        //判断之前是否有错误，再查询adminuser及adminpss
+        //判断之前是否有错误，再查询adminuser及adminpass
         if (!$this->hasErrors()) {
-
-            $data = self::find()->where('adminuser= :user and adminpss = :pass', [
-                        ":user" => $this->adminuser, ":pass" => md5($this->adminpss)
+            //用索引adminuser+adminpass
+            $data = self::find()->where('adminuser= :user and adminpass = :pass', [
+                        ":user" => $this->adminuser, ":pass" => md5($this->adminpass)
                     ])->one();
 
             //根据$data返回类型判断，为空报错
             if (is_null($data)) {
-                $this->addError("adminpss", "用户名或密码错误");
+                $this->addError("adminpass", "用户名或密码错误");
             }
         }
     }
 
-   
-    public function login($data) {
+    public function validateEmail() {
+        if (!$this->hasErrors()) {
+            $data = self::find()->where('adminuser = :user and adminemail = :email', [
+                        ":user" => $this->adminuser, ":email" => $this->adminemail])
+                    ->one();
+            if (is_null($data)) {
+                $this->addError("adminemail", "帐号邮箱不匹配");
+            }
+        }
+    }
 
-        //如果载入成功并且验证成功
+    public function login($data) {
+        //场景声明，场景不同验证规则不同
+        $this->scenario = "login";
+
+        //如果载入成功并且验证成功,validate指rules的验证
         if ($this->load($data) && $this->validate()) {
 
             //勾选‘记住我’则设置session有效期为lifetime）
@@ -74,23 +91,18 @@ class ShopAdmin extends \yii\db\ActiveRecord {
         return FALSE;
     }
 
-//（gii）数据表验证规则
-//    public function rules() {
-//        return [
-//            [['adminuser', 'adminpss', 'adminemail', 'createtime'], 'required'],
-//            [['logintime', 'loginip', 'createtime'], 'integer'],
-//            [['adminuser', 'adminpss'], 'string', 'max' => 32],
-//            [['adminemail'], 'string', 'max' => 50],
-//            [['adminuser', 'adminpss'], 'unique', 'targetAttribute' => ['adminuser', 'adminpss'], 'message' => 'The combination of 管理员帐号 and 管理员密码 has already been taken.'],
-//            [['adminuser', 'adminemail'], 'unique', 'targetAttribute' => ['adminuser', 'adminemail'], 'message' => 'The combination of 管理员帐号 and 管理员邮箱 has already been taken.'],
-//        ];
-//    }
-//（gii）属性标签
+    public function seekPass($data) {
+        $this->scenario = 'seekpass';
+        if ($this->load($data) && $this->validate()) {
+            //发送邮件
+        }
+    }
+
     public function attributeLabels() {
         return [
             'adminid' => '主键ID',
             'adminuser' => '管理员帐号',
-            'adminpss' => '管理员密码',
+            'adminpass' => '管理员密码',
             'adminemail' => '管理员邮箱',
             'logintime' => '登录时间',
             'loginip' => '登录IP',
